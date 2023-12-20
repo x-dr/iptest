@@ -31,6 +31,7 @@ jobs:
         run: |
           chmod +x ./iptest.sh
           bash ./iptest.sh
+          python ./df_sorted.py
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
