@@ -27,7 +27,7 @@ jobs:
       # - name: 'Install requirements'
       #   run: pip install -r ./requirements.txt
       - name: 'Working'
-        timeout-minutes: 360
+        # timeout-minutes: 360
         run: |
           chmod +x ./iptest.sh
           bash ./iptest.sh

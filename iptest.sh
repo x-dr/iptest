@@ -274,7 +274,9 @@ then
 	echo "当前没有任何有效IP"
 elif [ $mode == 1 ]
 then
-	echo "中转IP,中转端口,回源IP,国家,数据中心,IP类型,网络延迟,等效带宽,峰值速度">$(echo $filename | awk -F. '{print $1}')-测速.csv
+	timestamp=$(date +%s)
+    speedfile=$(echo "$(echo $filename | awk -F. '$timestamp-{print $1}').csv")
+	echo "中转IP,中转端口,回源IP,国家,数据中心,IP类型,网络延迟,等效带宽,峰值速度">"$speedfile"
 	for i in `cat rtt.txt | sed -e 's/ /_/g'`
 	do
 		ip=$(echo $i | awk -F, '{print $1}')
@@ -302,12 +304,13 @@ then
 		fi
 		if [ $maxspeed != 0 ]
 		then
-			echo "$i,$maxbandwidth Mbps,$maxspeed kB/s" | sed -e 's/_/ /g'>>$(echo $filename | awk -F. '{print $1}')-测速.csv
+			echo "$i,$maxbandwidth Mbps,$maxspeed kB/s" | sed -e 's/_/ /g'>>"$speedfile"
 		fi
 	done
 	rm -rf log realip.txt rtt.txt
-	timestamp=$(date +%s)
-    speedfile=$(echo "$(echo $filename | awk -F. '$timestamp-{print $1}').csv")
+	# timestamp=$(date +%s)
+    # speedfile=$(echo "$(echo $filename | awk -F. '$timestamp-{print $1}').csv")
+	iconv -f UTF-8 -t GBK "$speedfile" > "$speedfile-gbk.csv"
     rm -f ./latest.csv
     cp "$speedfile" latest.csv
     echo -e "${Font_Green}测速文件:${Font_Red}$speedfile"
