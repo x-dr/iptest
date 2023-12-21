@@ -56,6 +56,7 @@ echo -e "${Font_Green}扫描端口:${Font_Red}$port"
 echo -e "${Font_Green}设置curl测试进程数:${Font_Red}$tasknum"
 echo -e "${Font_Green}是否需要测速:${Font_Red}$mode\n"
 
+
 seconds=10
 while [ $seconds -gt 0 ]; do
     echo -ne "${Font_Green}>> ${Font_Red}$seconds s${Font_Suffix} ${Font_Green}后开始测试,按 Ctrl+C 退出测试...\r"
@@ -275,7 +276,7 @@ then
 elif [ $mode == 1 ]
 then
 	timestamp=$(date +%s)
-    speedfile=$(echo "$(echo $filename | awk -F. '$timestamp-{print $1}').csv")
+	speedfile="$timestamp-$filename.csv"
 	echo "中转IP,中转端口,回源IP,国家,数据中心,IP类型,网络延迟,等效带宽,峰值速度">"$speedfile"
 	for i in `cat rtt.txt | sed -e 's/ /_/g'`
 	do
