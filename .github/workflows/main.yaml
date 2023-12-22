@@ -30,7 +30,7 @@ jobs:
         # timeout-minutes: 360
         run: |
           chmod +x ./iptest.sh
-          bash ./iptest.sh
+          bash ./iptest.sh -t 100
           python ./df_sorted.py
       - name: Commit files
         run: |
