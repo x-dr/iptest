@@ -8,4 +8,4 @@ def remove_duplicates(filename):
         file.writelines(unique_lines)
 
 # 调用函数并传入文件名
-remove_duplicates('ipb.txt')
+remove_duplicates('ip.txt')
