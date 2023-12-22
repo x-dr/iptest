@@ -277,6 +277,7 @@ elif [ $mode == 1 ]
 then
 	timestamp=$(date +%s)
 	speedfile="$timestamp-$filename.csv"
+	cp realip.txt realip-("$timestamp").txt
 	echo "中转IP,中转端口,回源IP,国家,数据中心,IP类型,网络延迟,等效带宽,峰值速度">"$speedfile"
 	for i in `cat rtt.txt | sed -e 's/ /_/g'`
 	do
