@@ -30,13 +30,13 @@ jobs:
         # timeout-minutes: 360
         run: |
           mv *.csv oldcsv/
-          mv realip*.txt oldrealip/
           wget -O IPDBproxy.txt  https://raw.githubusercontent.com/ymyuuu/IPDB/main/proxy.txt 
           cat IPDBproxy.txt >> ip.txt 
           mv IPDBproxy.txt IPDBproxy-$(date +%Y%m%d%H%M%S).txt
           chmod +x ./iptest.sh
           bash ./iptest.sh -t 100
           python ./df_sorted.py
+          mv realip*.txt oldrealip/
       - name: Commit files
         run: |
           git config --local user.email "action@github.com"
